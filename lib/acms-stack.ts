@@ -1,7 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { CfnOutput, RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
-import { PipelineStage } from "./pipeline-stage";
 import {
   CodePipeline,
   ShellStep,
@@ -26,24 +25,5 @@ export class AcmsStack extends cdk.Stack {
         commands: ["npm ci", "npm run build", "npx cdk synth"],
       }),
     });
-
-    /***
-     * Add test stage
-     ***/
-    const devStage = pipeline.addStage(
-      new PipelineStage(this, "PipelineDevStage", {
-        stageName: "dev",
-      })
-    );
-
-    devStage.addPost(
-      new ManualApprovalStep("Manual aproval before production")
-    );
-
-    const prodStage = pipeline.addStage(
-      new PipelineStage(this, "PipelineProdStage", {
-        stageName: "prod",
-      })
-    );
   }
 }
