@@ -1,5 +1,6 @@
 import { AcmsSharedStack } from "./acms-shared-stack";
 import { Stage, StageProps } from "aws-cdk-lib";
+import { UserLamdaStacks } from "./user-stack";
 import { Construct } from "constructs";
 
 export class PipelineStage extends Stage {
@@ -8,5 +9,9 @@ export class PipelineStage extends Stage {
 
     const acmsSharedStack = new AcmsSharedStack(this, "AcmsSharedStack");
 
+    new UserLamdaStacks(this, "UserLambdaStacks", {
+        acmsDatabase: acmsSharedStack.acmsDatabase,
+        acmsGraphqlApi: acmsSharedStack.acmsGraphqlApi,
+      });
   }
 }
