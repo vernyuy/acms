@@ -15,7 +15,7 @@ export class AcmsStack extends cdk.Stack {
     super(scope, id, props);
 
     /***********************************************************************
-     *    Create codepipeline for the project using github as code source.
+     *    CICD with CodePipeline and github
      ***********************************************************************/
     const pipeline = new CodePipeline(this, "acms-pipeline", {
       synth: new ShellStep("synth", {
