@@ -20,6 +20,7 @@ export function request(
       GSI2SK: `BUILDING#${id}`,
       ENTITY: "BUILDING",
       createdOn: util.time.nowISO8601(),
+      id: id,
       ...item,
     }),
   };
